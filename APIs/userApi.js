@@ -3,9 +3,10 @@ const userApp=exp.Router();
 const User=require('../Models/userModel')
 const bcrypt = require('bcrypt');
 const expressAsync=require('express-async-handler')
+const jwt=require('jsonwebtoken')
+const tokenVerify = require('../middlewares/tokenVerify');
 
-
-userApp.get('/',expressAsync(async(req,res)=>{
+userApp.get('/',tokenVerify,expressAsync(async(req,res)=>{
     const users=req.app.get('users')
     let arr=await users.find().toArray()
     res.send({message:'Hello User',payload:arr})
@@ -47,8 +48,10 @@ userApp.post('/login',expressAsync(async(req,res)=>{
     }
     else{
         let res1=await bcrypt.compare(password,user.password)
-        if(res1===true)
-            res.send({message:'Hello User',payload:user})
+        if(res1===true){
+            let token=jwt.sign({name:nameUrl},process.env.SECRET_KEY,{expiresIn:'20s'})
+            res.send({message:'Hello User',payload:user,token:token})
+        }
         else
             res.send({message:'Invalid credentials'})
     }
