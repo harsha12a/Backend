@@ -2,6 +2,9 @@
 get http://localhost:3000/user/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
 ###
+get http://localhost:3000/user/Ravi
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
+###
 post http://localhost:3000/user/register
 Content-Type: application/json
 
@@ -27,6 +30,7 @@ Content-Type: application/json
 
 ###
 put http://localhost:3000/user/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
 Content-Type: application/json
 
 {
@@ -42,3 +46,4 @@ Content-Type: application/json
 }
 ###
 delete http://localhost:3000/user/delete/Ravi
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI

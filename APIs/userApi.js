@@ -12,7 +12,7 @@ userApp.get('/',tokenVerify,expressAsync(async(req,res)=>{
     res.send({message:'Hello User',payload:arr})
 }))
 
-userApp.get('/:nameUrl',expressAsync(async(req,res)=>{
+userApp.get('/:nameUrl',tokenVerify,expressAsync(async(req,res)=>{
     const users=req.app.get('users')
     let {nameUrl}=req.params
     let user=await users.findOne({name:nameUrl})
@@ -57,7 +57,7 @@ userApp.post('/login',expressAsync(async(req,res)=>{
     }
 }))
 
-userApp.put('/update',expressAsync(async(req,res)=>{
+userApp.put('/update',tokenVerify,expressAsync(async(req,res)=>{
     const users=req.app.get('users')
     let newUser=req.body
     let user=await users.findOne({name:{$eq:newUser.nameUrl}})
@@ -70,7 +70,7 @@ userApp.put('/update',expressAsync(async(req,res)=>{
     }
 }))
 
-userApp.delete('/delete/:nameUrl',expressAsync((req,res)=>{
+userApp.delete('/delete/:nameUrl',tokenVerify,expressAsync((req,res)=>{
     const users=req.app.get('users')
     let nameUrl=req.params.nameUrl
     let user=users.findOne({name:nameUrl})
