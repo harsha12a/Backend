@@ -8,10 +8,10 @@ userApp.get('/',async(req,res)=>{
     res.send({message:'Hello User',payload:arr})
 })
 
-userApp.get('/:username',async(req,res)=>{
+userApp.get('/:nameUrl',async(req,res)=>{
     const users=req.app.get('users')
-    let {username}=req.params
-    let user=await users.findOne({name:username})
+    let {nameUrl}=req.params
+    let user=await users.findOne({name:nameUrl})
     if(user===null){
         res.send({message:'User not found'})
     }
@@ -22,6 +22,7 @@ userApp.get('/:username',async(req,res)=>{
 userApp.post('/register',async(req,res)=>{
     const users=req.app.get('users')
     let data=req.body
+    
     try{
         let obj=new User(data)
         await obj.save()
@@ -35,8 +36,8 @@ userApp.post('/register',async(req,res)=>{
 
 userApp.post('/login',async(req,res)=>{
     const users=req.app.get('users')
-    let {username,password}=req.body
-    let user=await users.findOne({name:username})
+    let {nameUrl,password}=req.body
+    let user=await users.findOne({name:nameUrl})
     if(user===null){
         res.send({message:'User not found'})
     }
@@ -50,26 +51,26 @@ userApp.post('/login',async(req,res)=>{
 
 userApp.put('/update',async(req,res)=>{
     const users=req.app.get('users')
-    let username=req.body
-    let user=await users.findOne({name:{$eq:username}})
+    let nameUrl=req.body
+    let user=await users.findOne({name:{$eq:nameUrl}})
     if(user===null){
         res.send({message:'User not found'})
     }
     else{
-        await users.updateOne({name:{$eq:username}},{$set:{...user}})
+        await users.updateOne({name:{$eq:nameUrl}},{$set:{...user}})
         res.send({message:'User updated',payload:users})
     }
 })
 
-userApp.delete('/delete',(req,res)=>{
+userApp.delete('/delete/:nameUrl',(req,res)=>{
     const users=req.app.get('users')
-    let {username,password}=req.body
-    let user=users.findOne({name:username})
+    let nameUrl=req.params.nameUrl
+    let user=users.findOne({name:nameUrl})
     if(user===null){
         res.send({message:'User not found'})
     }
     else{
-            users.deleteOne({name:username})
+            users.deleteOne({name:nameUrl})
             res.send({message:'User deleted'})
     }
 })

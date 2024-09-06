@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURI = process.env.MONGO; // Replace with your MongoDB URI
+const mongoURI = process.env.MONGO+'/find'; // Replace with your MongoDB URI
 
 // Connect to MongoDB
 mongoose.connect(mongoURI)
@@ -23,11 +23,5 @@ mongoose.connection.on('disconnected', () => {
   console.log('Mongoose disconnected from MongoDB');
 });
 
-// Graceful shutdown
-process.on('SIGINT', async () => {
-  await mongoose.connection.close();
-  console.log('MongoDB connection closed due to app termination');
-  process.exit(0);
-});
 
-module.exports = mongoose; // Export the Mongoose instance for use in other modules
+module.exports = mongoose;

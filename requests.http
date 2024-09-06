@@ -1,0 +1,27 @@
+###
+get http://localhost:3000/user/Ravi
+###
+post http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+    "name":"Ravi",
+    "age":21,
+    "email":"ravi@gmail.com",
+    "password":"ravi123",
+    "role":"merchant",
+    "address":{
+        "city":"Vij",
+        "state":"AP"
+    }
+}
+###
+post http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "nameUrl":"Ravi",
+    "password":"ravi123"
+}
+###
+delete http://localhost:3000/user/delete/Ravi

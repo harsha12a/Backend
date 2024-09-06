@@ -11,7 +11,7 @@ const merchantApp = require('./APIs/merchantApi');
 
 let mClient=new MongoClient(process.env.MONGO)
 mClient.connect().then((obj)=>{
-    let flat=obj.db('flat')
+    let flat=obj.db('find')
     let users=flat.collection('users')
     app.set('users',users)
     console.log('Connected to db');
