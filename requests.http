@@ -23,5 +23,21 @@ Content-Type: application/json
     "nameUrl":"Ravi",
     "password":"ravi123"
 }
+
+###
+put http://localhost:3000/user/update
+Content-Type: application/json
+
+{
+    "nameUrl":"Ravi",
+    "age":21,
+    "email":"ravi@gmail.com",
+    "password":"$2b$10$vg91Ag4KW84AVAn8pe3q0e4Fi9PIc62Xy7TV3DodRXnMs3Z5wLvIe",
+    "role":"merchant",
+    "address":{
+        "city":"Kphb",
+        "state":"Hyd"
+    }
+}
 ###
 delete http://localhost:3000/user/delete/Ravi
