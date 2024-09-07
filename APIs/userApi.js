@@ -47,10 +47,10 @@ userApp.post('/login',expressAsync(async(req,res)=>{
         res.send({message:'User not found'})
     }
     else{
-        let res1=await bcrypt.compare(password,user.password)
-        if(res1===true){
-            let token=jwt.sign({name:nameUrl},process.env.SECRET_KEY,{expiresIn:'20s'})
-            res.send({message:'Hello User',payload:user,token:token})
+        let areSame=await bcrypt.compare(password,user.password)
+        if(areSame===true){
+            let token=jwt.sign({name:nameUrl},process.env.SECRET_KEY,{expiresIn:'30s'})
+            res.send({message:'Hello User',token:token,payload:user})
         }
         else
             res.send({message:'Invalid credentials'})

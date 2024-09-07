@@ -1,9 +1,9 @@
 ###
 get http://localhost:3000/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4NjYxNiwiZXhwIjoxNzI1Njg2NjM2fQ.RwgTZIEY8q9_gfpYtel-4QH2NtbRT6LVtn2RilJt5cg
 ###
 get http://localhost:3000/user/Ravi
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4NjYxNiwiZXhwIjoxNzI1Njg2NjM2fQ.RwgTZIEY8q9_gfpYtel-4QH2NtbRT6LVtn2RilJt5cg
 ###
 post http://localhost:3000/user/register
 Content-Type: application/json
@@ -24,13 +24,13 @@ post http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "nameUrl":"Ravi",
-    "password":"ravi123"
+    "nameUrl":"User1",
+    "password":"password123"
 }
 
 ###
 put http://localhost:3000/user/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4MDE3MSwiZXhwIjoxNzI1NjgwMTkxfQ.JJREoZeXrPvRgk_RHrkPEFKrRta-f3C1iEW7dqiDeUc
 Content-Type: application/json
 
 {
@@ -46,4 +46,4 @@ Content-Type: application/json
 }
 ###
 delete http://localhost:3000/user/delete/Ravi
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTYzMTI1MiwiZXhwIjoxNzI1NjMxMjcyfQ.ScSTktyGNhhnJoxU0ubIL5O7_e_hZkyHDnsPqAKlEmI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4MDEzNCwiZXhwIjoxNzI1NjgwMTU0fQ.9m8voCkQp0PHP92lZ_T0f1JbxugfD_rTJqjGijNASnw
