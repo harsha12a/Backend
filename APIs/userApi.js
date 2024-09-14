@@ -26,16 +26,21 @@ userApp.get('/:nameUrl',tokenVerify,expressAsync(async(req,res)=>{
 userApp.post('/register',expressAsync(async(req,res)=>{
     const users=req.app.get('users')
     let data=req.body
-    
-    try{
-        let obj=new User(data)
-        obj.password=await bcrypt.hash(obj.password,10)
-        await obj.save()
-        res.send({message:'User registered',payload:data})
+    let user=await users.findOne({name:data.nameUrl})
+    if(user===null){
+        res.send({message:'User already exists'})
     }
-    catch(err){
-        console.log(err);
-        res.send({message:'Error occured',error:err.message})
+    else{
+        try{
+            let obj=new User(data)
+            obj.password=await bcrypt.hash(obj.password,10)
+            await obj.save()
+            res.send({message:'User registered',payload:data})
+        }
+        catch(err){
+            console.log(err);
+            res.send({message:'Error',error:err.message})
+        }
     }
 }))
 
@@ -49,7 +54,7 @@ userApp.post('/login',expressAsync(async(req,res)=>{
     else{
         let areSame=await bcrypt.compare(password,user.password)
         if(areSame===true){
-            let token=jwt.sign({name:nameUrl},process.env.SECRET_KEY,{expiresIn:'30s'})
+            let token=jwt.sign({name:nameUrl},process.env.SECRET_KEY,{expiresIn:'10h'})
             res.send({message:'Hello User',token:token,payload:user})
         }
         else
@@ -70,16 +75,36 @@ userApp.put('/update',tokenVerify,expressAsync(async(req,res)=>{
     }
 }))
 
-userApp.delete('/delete/:nameUrl',tokenVerify,expressAsync((req,res)=>{
+userApp.delete('/delete/:nameUrl',tokenVerify,expressAsync(async(req,res)=>{
     const users=req.app.get('users')
     let nameUrl=req.params.nameUrl
-    let user=users.findOne({name:nameUrl})
+    let user=await users.findOne({name:nameUrl})
     if(user===null){
         res.send({message:'User not found'})
     }
     else{
-            users.deleteOne({name:nameUrl})
+            await users.deleteOne({name:nameUrl})
             res.send({message:'User deleted'})
+    }
+}))
+
+userApp.post('/filter',tokenVerify,expressAsync(async(req,res)=>{
+    let users=req.app.get('users')
+    try{
+        let filters=req.body.filters
+        if(filters===undefined) res.send({message:"No filters"})
+        let query={}
+        filters?.forEach(({field,value})=>{
+            if(field && value !== undefined){
+                query[field]=value
+            }
+        })
+        let arr=await users.find(query).toArray()
+        if(arr.length===0) res.send({message:'User not found'})
+        else res.send({message:'success',payload:arr})
+    }
+    catch(err){
+        res.send({message:'Error',Error:err.message})
     }
 }))
 

@@ -3,7 +3,7 @@ let {Schema}=mongoose
 const propertySchema=new Schema({
     type:{
         type:String,
-        enum:['flat','hostel','land'],
+        enum:['flat','houses','land'],
     },
     details:{
         location:{

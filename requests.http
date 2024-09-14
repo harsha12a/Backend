@@ -1,9 +1,11 @@
 ###
 get http://localhost:3000/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4NjYxNiwiZXhwIjoxNzI1Njg2NjM2fQ.RwgTZIEY8q9_gfpYtel-4QH2NtbRT6LVtn2RilJt5cg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3MjYzMDkzODEsImV4cCI6MTcyNjM0NTM4MX0.VwzU69QZLmKO5DUJt64e1XJzcKsKziX7stjdqkEUZys
+
 ###
 get http://localhost:3000/user/Ravi
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4NjYxNiwiZXhwIjoxNzI1Njg2NjM2fQ.RwgTZIEY8q9_gfpYtel-4QH2NtbRT6LVtn2RilJt5cg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3MjYzMDkzODEsImV4cCI6MTcyNjM0NTM4MX0.VwzU69QZLmKO5DUJt64e1XJzcKsKziX7stjdqkEUZys
+
 ###
 post http://localhost:3000/user/register
 Content-Type: application/json
@@ -19,6 +21,7 @@ Content-Type: application/json
         "state":"AP"
     }
 }
+
 ###
 post http://localhost:3000/user/login
 Content-Type: application/json
@@ -30,7 +33,7 @@ Content-Type: application/json
 
 ###
 put http://localhost:3000/user/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4MDE3MSwiZXhwIjoxNzI1NjgwMTkxfQ.JJREoZeXrPvRgk_RHrkPEFKrRta-f3C1iEW7dqiDeUc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3MjYzMDkzODEsImV4cCI6MTcyNjM0NTM4MX0.VwzU69QZLmKO5DUJt64e1XJzcKsKziX7stjdqkEUZys
 Content-Type: application/json
 
 {
@@ -44,6 +47,20 @@ Content-Type: application/json
         "state":"Hyd"
     }
 }
+
 ###
 delete http://localhost:3000/user/delete/Ravi
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmF2aSIsImlhdCI6MTcyNTY4MDEzNCwiZXhwIjoxNzI1NjgwMTU0fQ.9m8voCkQp0PHP92lZ_T0f1JbxugfD_rTJqjGijNASnw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3MjYzMDkzODEsImV4cCI6MTcyNjM0NTM4MX0.VwzU69QZLmKO5DUJt64e1XJzcKsKziX7stjdqkEUZys
+
+###
+post http://localhost:3000/user/filter
+Content-Type: application/json
+
+{
+    "filters":[
+        {
+            "field" : "address.city",
+            "value" : "Kphb"
+        }
+    ]
+}
