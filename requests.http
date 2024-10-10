@@ -1,6 +1,6 @@
 ###
 get http://localhost:3000/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3MjYzMDkzODEsImV4cCI6MTcyNjM0NTM4MX0.VwzU69QZLmKO5DUJt64e1XJzcKsKziX7stjdqkEUZys
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3Mjg1NTk3NzEsImV4cCI6MTcyODU5NTc3MX0.Z0dsJ0RhN2MWKcyEOj-8x60JEJLxReEyTcmF91wIM-Q
 
 ###
 get http://localhost:3000/user/Ravi
