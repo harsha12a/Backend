@@ -1,6 +1,5 @@
 const exp = require('express');
 const userApp=exp.Router();
-const User=require('../Models/userModel')
 const bcrypt = require('bcrypt');
 const expressAsync=require('express-async-handler')
 const jwt=require('jsonwebtoken')
@@ -32,7 +31,7 @@ userApp.post('/register',expressAsync(async(req,res)=>{
     }
     else{
         try{
-            let obj=new User(data)
+            let obj=data;
             obj.password=await bcrypt.hash(obj.password,10)
             await obj.save()
             res.send({message:'User registered',payload:data})
