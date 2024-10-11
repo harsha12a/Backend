@@ -3,27 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socket.IO Test</title>
+    <title>Socket.IO Private Messaging</title>
+    <!-- Include the Socket.IO client-side library -->
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <style>
+        /* Simple styling for the chat container */
+        #messages {
+            border: 1px solid #ddd;
+            width: 400px;
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+        .message {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
 </head>
 <body>
-    <h1>Socket.IO Test</h1>
-    <input id="messageInput" placeholder="Type a message" />
-    <button onclick="sendMessage()">Send</button>
-    <ul id="messages"></ul>
+    <h1>Socket.IO Private Messaging</h1>
+
+    <!-- Input fields to register user and send messages -->
+    <input id="userId" type="text" placeholder="Enter your user ID" />
+    <button onclick="registerUser()">Register</button>
+
+    <br/><br/>
+    <input id="receiverId" type="text" placeholder="Receiver's ID" />
+    <input id="message" type="text" placeholder="Enter your message" />
+    <button onclick="sendMessage()">Send Message</button>
+
+    <!-- Display messages here -->
+    <div id="messages">
+        <h3>Messages:</h3>
+    </div>
 
     <script>
-        const socket = io('http://localhost:3000')
+        // Connect to the Socket.IO server (adjust URL if needed)
+        const socket = io('http://localhost:3000'); // Assuming your server is running on port 3000
+
+        // Register the user by sending their user ID to the server
+        function registerUser() {
+            const userId = document.getElementById('userId').value;
+            socket.emit('register', userId); // Emit a register event with userId
+        }
+
+        // Send a private message to the receiver
+        function sendMessage() {
+            const senderId = document.getElementById('userId').value;
+            const receiverId = document.getElementById('receiverId').value;
+            const message = document.getElementById('message').value;
+
+            // Emit the private_message event
+            socket.emit('private_message', {
+                senderId,
+                receiverId,
+                message
+            });
+
+            // Display the message on the sender's screen
+            addMessageToScreen(`Me: ${message}`);
+        }
+
+        // Listen for incoming messages and display them on the screen
         socket.on('message', (data) => {
-            const li = document.createElement('li');
-            li.innerText = data;
-            document.getElementById('messages').appendChild(li);
+            addMessageToScreen(`${data.senderId}: ${data.message}`);
         });
 
-        // Function to send a message
-        function sendMessage() {
-            const message = document.getElementById('messageInput').value;
-            socket.emit('message', message);
+        // Function to add a message to the messages div
+        function addMessageToScreen(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.innerText = message;
+
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto-scroll to the bottom
         }
     </script>
 </body>

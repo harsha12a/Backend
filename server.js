@@ -18,17 +18,42 @@ const io = new Server(server, {
 });
 
 
+const users = {};
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
 
-    socket.on('message', (data) => {
-        console.log('Message from client:', data);
-        socket.emit('response', { message: 'Message received!', data });
-        io.emit('message', data);
+    // Handle user registration with their unique user ID
+    socket.on('register', (userId) => {
+        users[userId] = socket.id; // Associate userId with socket.id
+        console.log(`User registered: ${userId} with socket ID: ${socket.id}`);
     });
 
+    // Handle sending a message from sender to receiver
+    socket.on('private_message', ({ senderId, receiverId, message }) => {
+        const receiverSocketId = users[receiverId];
+        
+        if (receiverSocketId) {
+            // Send the message to the receiver
+            io.to(receiverSocketId).emit('message', {
+                senderId,
+                message
+            });
+            console.log(`Message from ${senderId} to ${receiverId}: ${message}`);
+        } else {
+            console.log(`User ${receiverId} is not connected`);
+        }
+    });
+
+    // Handle disconnection
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id);
+        // Remove the user from the users object (cleanup)
+        for (let userId in users) {
+            if (users[userId] === socket.id) {
+                delete users[userId];
+                break;
+            }
+        }
     });
 });
 
