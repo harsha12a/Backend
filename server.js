@@ -24,15 +24,22 @@ io.on('connection', (socket) => {
 
     // Handle user registration with their unique user ID
     socket.on('register', (userId) => {
-        users[userId] = socket.id; // Associate userId with socket.id
-        console.log(`User registered: ${userId} with socket ID: ${socket.id}`);
+        if(users[userId]!==undefined){
+            console.log('User already exists Try with another name')
+        }
+        else {
+            users[userId] = socket.id; // Associate userId with socket.id
+            console.log(`User registered: ${userId} with socket ID: ${socket.id}`);
+        }
     });
 
     // Handle sending a message from sender to receiver
     socket.on('private_message', ({ senderId, receiverId, message }) => {
         const receiverSocketId = users[receiverId];
-        
-        if (receiverSocketId) {
+        if(receiverSocketId===socket.id){
+            console.log("you can't send msg to yourself")
+        }
+        else if (receiverSocketId&&receiverSocketId!==socket.id) {
             // Send the message to the receiver
             io.to(receiverSocketId).emit('message', {
                 senderId,
