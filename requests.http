@@ -1,5 +1,5 @@
 ###
-get http://localhost:3000/user/
+get http://localhost:5000/user/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlcjEiLCJpYXQiOjE3Mjg1NTk3NzEsImV4cCI6MTcyODU5NTc3MX0.Z0dsJ0RhN2MWKcyEOj-8x60JEJLxReEyTcmF91wIM-Q
 
 ###
@@ -64,3 +64,5 @@ Content-Type: application/json
         }
     ]
 }
+###
+get http://localhost:5000/agent/agents

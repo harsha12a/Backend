@@ -3,10 +3,9 @@ const http = require('http');
 const { Server } = require('socket.io');
 const {MongoClient}=require('mongodb')
 require('dotenv').config()
-// require('./db')
 
 const app=exp()
-app.use(exp.json())
+// app.use(exp.json())
 
 const server = http.createServer(app);
 
@@ -66,13 +65,15 @@ io.on('connection', (socket) => {
 
 const port=(process.env.PORT)
 const userApp = require('./APIs/userApi');
-const merchantApp = require('./APIs/merchantApi');
+const agentApp = require('./APIs/agentsAPI');
 
-let mClient=new MongoClient(process.env.MONGO)
+let mClient=new MongoClient(process.env.DB_URL)
 mClient.connect().then((obj)=>{
-    let flat=obj.db('find')
+    const flat=obj.db('find')
     let users=flat.collection('users')
+    let agents=flat.collection('agents')
     app.set('users',users)
+    app.set('agents',agents)
     console.log('Connected to db');
     server.listen(port,()=>{
         console.log(`Port at ${port}`);
@@ -81,7 +82,7 @@ mClient.connect().then((obj)=>{
     console.log('error in connecting',err);
 })
 app.use('/user',userApp)
-app.use('/merchant',merchantApp)
+app.use('/agent',agentApp)
 
 app.use('*',(req,res)=>{
     res.send({message:'Page not found'})
