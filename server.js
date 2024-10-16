@@ -3,10 +3,12 @@ const http = require('http');
 const { Server } = require('socket.io');
 const {MongoClient}=require('mongodb')
 require('dotenv').config()
-
+const cors = require('cors');
 const app=exp()
 // app.use(exp.json())
-
+app.use(cors({
+    origin: "*",
+}))
 const server = http.createServer(app);
 
 const io = new Server(server, {
